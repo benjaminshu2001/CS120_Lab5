@@ -14,24 +14,17 @@
 # An example set of tests is shown below. It is important to note that these tests are not "unit tests" in 
 # that they are not ran in isolation but in the order shown and the state of the device is not reset or 
 # altered in between executions (unless preconditions are used).
-tests = [ {'description': 'PINA: 0xFE => PORTC: 0x08',
-    'steps': [{'inputs': [('PINA', 0xFE)], 'iterations': 2},],
-    'expected': [('PORTC',0x08)],
+tests = [ {'description': 'PINA: 0xFF => PORTB: 0x00',
+    'steps': [{'inputs': [('PINA', 0xFF)], 'iterations': 2},],
+    'expected': [('PORTB',0x00)],
     },
-    {'description': 'PINA: 0xFD => PORTC: 0x07, state: pressA0',
+    {'description': 'PINA: 0xFE => PORTB: 0x02',
     'steps': [{'inputs': [('PINA', 0xFE)], 'iterations': 2},
-            {'inputs': [('PINA', 0xFD)], 'iterations': 2}, ],
-    'expected': [('PORTC',0x07)],
+              {'inputs': [('PINA', 0xFF)], 'iterations': 2},
+              {'inputs': [('PINA', 0xFE)], 'iterations': 2}, ],
+    'expected': [('PORTB',0x02)],
     },
-    {'description': 'Incrementing twice, PORTC => 9',
-    'steps': [{'inputs': [('PINA', 0xFE)], 'iterations': 2},
-            {'inputs': [('PINA', 0xFE)], 'iterations': 2}, ], 
-    'expected': [('PORTC', 0x09)],
-    },
-    {'description': 'count at 0, PINA: 0xFC => PORTC: 0',
-    'steps': [{'inputs': [('PINA', 0xFC)], 'iterations': 2},],
-    'expected': [('PORTC', 0x00)],
-    },
+
     ]  
 # Optionally you can add a set of "watch" variables these need to be global or static and may need
 # to be scoped at the function level (for static variables) if there are naming conflicts. The 
