@@ -24,14 +24,14 @@ void Tick_Counter() {
             State = Wait;
             break;
         case Wait:
-            if((~PINA & 0x01) == 0x01) {
-                State = Inc;
+            if((~PINA & 0x03) == 0x03) {
+                State = Reset;
             }
             else if((~PINA & 0x02) == 0x02) {
                 State = Dec;
             }
-            else if((~PINA & 0x03) == 0x03) {
-                State = Reset;
+            else if((~PINA & 0x01) == 0x01) {
+                State = Inc;
             }
             else {
                 State = Wait;
@@ -41,36 +41,36 @@ void Tick_Counter() {
             State = IncDepressed;
             break;
         case IncDepressed:
-            if((~PINA & 0x01) == 0x01) {
-                State = IncDepressed;
+            if((~PINA & 0x03) == 0x03) {
+                State = Reset;
             }
             else if((~PINA & 0x00) == 0x00){
                 State = Wait;
             }
-            else if((~PINA & 0x03) == 0x03) {
-                State = Reset;
+            else if((~PINA & 0x01) == 0x01) {
+                State = IncDepressed;
             }
             break;
         case Dec:
             State = DecDepressed;
             break;
         case DecDepressed:
-            if((~PINA & 0x02) == 0x02) {
-                State = DecDepressed;
+            if((~PINA & 0x03) == 0x03) {
+                State = Reset;
             }
             else if((~PINA & 0x00) == 0x00){
                 State = Wait;
             }
-            else if((~PINA & 0x03) == 0x03) {
-                State = Reset;
+            else if((~PINA & 0x02) == 0x02) {
+                State = DecDepressed;
             }
             break;
         case Reset:
             if((~PINA & 0x03) == 0x03) {
                 State = Reset;
             }
-            else if((~PINA & 0x01) == 0x01){
-                State = Inc;
+            else {
+                State = Wait;
             }
             break;
         default:
